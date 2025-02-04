@@ -51,6 +51,39 @@ func identifyType(i interface{}) {
 	}
 }
 
+// Enums: They give names to fixed values so we don’t use random numbers or strings. (not a built in type, implemented using const)
+type Color int
+
+const (
+	Red   Color = iota // 0
+	Blue               // 1
+	Green              // 2
+)
+
+type ServerState int
+
+const (
+	idol ServerState = iota
+	connected
+	running
+	disconnected
+)
+
+func (ss ServerState) String() string {
+	switch ss {
+	case idol:
+		return "idol"
+	case connected:
+		return "connected"
+	case running:
+		return "running"
+	case disconnected:
+		return "disconnected"
+	default:
+		return "error"
+	}
+}
+
 func main() {
 	// Struct
 	fmt.Println(person{"Julie", 27})             // Positional fields
@@ -107,4 +140,14 @@ func main() {
 	identifyType(42)
 	identifyType(true)
 	identifyType(3.14)
+
+	// Structs = Store different types of data.
+	// Enums = Store fixed values (like options to choose from).
+	crayon := Blue
+	state := running
+
+	fmt.Println(crayon)
+	// In Go, when you print something using fmt.Println(), Go checks if that type has a String() method. If it does, it calls it automatically!
+	fmt.Println(state)
+	fmt.Println(idol)
 }
