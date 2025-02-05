@@ -117,7 +117,7 @@ func main() {
 	fmt.Println(e,f)
 	*/
 
-	//smthg related to map
+	/* //smthg related to map
 	a := map[string]int{
 		"musk":  1,
 		"muski": 2,
@@ -132,4 +132,12 @@ func main() {
 
 	fmt.Println(b) // returns true
 	fmt.Println(c) // returns false
+	*/
+
+	// String and runes
+	str := "Hii there"
+
+	for index, rune := range str {
+	fmt.Printf("index: %d, char: %c, unicode: U+%04X\n", index, rune, rune) // for such formatting, we use printf
+	}
 }
