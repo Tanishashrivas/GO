@@ -40,6 +40,12 @@ func applyOperation2(a, b int, op func(int, int) (int, error)) (int, error) {
 	return op(a, b)
 }
 
+func multi(factor int) func(int) int {
+	return func(x int) int {
+		return x * factor
+	}
+}
+
 func main() {
 	c := add(5, 7)
 	fmt.Println(c)
@@ -67,7 +73,8 @@ func main() {
 	//HOF
 	f3 := applyOperation(45, 5, add)
 	f4, err := applyOperation2(45, 5, divide)
+	f5 := multi(3)
 
-	fmt.Println(f3, f4, err)
+	fmt.Println(f3, f4, err, f5(5))
 
 }
