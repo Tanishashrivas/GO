@@ -1,0 +1,1 @@
+Checking up the making of a demo file in Go
