@@ -8,6 +8,12 @@ import (
 	"strings"
 )
 
+// For conversions:
+// strconv.Itoa(age) // Convert int → string
+// strconv.FormatFloat(pi, 'f', 2, 64) // (value, format, decimals, bitSize) // float → string
+// strconv.Atoi(strNum) // Convert string → int
+// strconv.ParseFloat(strNum, 64) // Convert string → float
+
 func main() {
 	var name string
 	fmt.Println("Enter your name:")
