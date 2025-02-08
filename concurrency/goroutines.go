@@ -14,6 +14,7 @@ import (
 
 var wg = sync.WaitGroup{} //explicitely initialized
 var mu sync.Mutex         // auto-initialized
+var m sync.RWMutex        // rread-write mutex, used when reads are more frequent
 var db = []string{"id1", "id2", "id3", "id4", "id5"}
 var results = []string{}
 
@@ -39,7 +40,19 @@ func dbCall(i int) {
 	var delay = 2000
 	// var delay = rand.Float32() * 2000
 	time.Sleep(time.Duration(delay) * time.Millisecond)
-	fmt.Println("Result of dbcall is: ", db[i])
+	update(i)
+	log()
+	defer wg.Done() // Mark this GoRoutine as finished (decrement the counter by 1)
+}
+
+func update(i int) {
+	mu.Lock()
 	results = append(results, db[i]) // multiple GoRoutines try to modify shared data at the same time. Might cause error. To avoid this, we use mutex
-	defer wg.Done()                  // Mark this GoRoutine as finished (decrement the counter by 1)
+	defer mu.Unlock()
+}
+
+func log() {
+	m.RLock()
+	fmt.Println("Result of dbcall is: ", results)
+	defer m.RUnlock()
 }
