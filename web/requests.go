@@ -4,13 +4,20 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
+	"strings"
 )
 
-const url string= "https://jsonplaceholder.typicode.com/posts/1";
+const baseUrl string= "http://localhost:8000";
 
 func main() {
-	// GET
-	response, err := http.Get(url);
+	// getReq(baseUrl)
+	// postReq(baseUrl)
+	// postFormReq(baseUrl)
+}
+
+func getReq(baseUrl string) {
+	response, err := http.Get(baseUrl+"/get");
 
 	checkNilErr(err)
 
@@ -27,7 +34,54 @@ func main() {
 	// fmt.Printf("data: %s", databytes)
 	fmt.Println("content:", string(databytes))
 
-	// POST
+	//OR
+
+	var responseString strings.Builder
+	bytecount, _ := responseString.Write(databytes)
+
+	fmt.Println(bytecount)
+	fmt.Println("from strings builder:", responseString.String())
+}
+
+func postReq(baseUrl string){
+	endpoint := fmt.Sprintf("%s/post", baseUrl) //formats string
+
+	respBody := strings.NewReader(`{
+	"name": "muskan",
+	"age": "22"
+	}`)
+
+	res, err := http.Post(endpoint, "application/json", respBody);
+
+	checkNilErr(err)
+	
+	content, err := ioutil.ReadAll(res.Body)
+	checkNilErr(err)
+
+	fmt.Println(string(content), res.StatusCode)
+}
+
+func postFormReq(baseUrl string){
+	endpoint := fmt.Sprintf("%s/postform", baseUrl) //formats string
+
+	respBody := url.Values{}
+
+	respBody.Add("firstname", "Muskan")
+	respBody.Add("lastname", "Shrivas")
+	respBody.Add("post", "L7 (iykyk)")
+
+	fmt.Println(respBody)
+	fmt.Println(respBody.Encode())
+
+	res, err := http.PostForm(endpoint, respBody);
+	// postform auto handles encoding of form data
+
+	checkNilErr(err)
+	
+	content, err := ioutil.ReadAll(res.Body)
+	checkNilErr(err)
+
+	fmt.Println(string(content), res.StatusCode)
 }
 
 func checkNilErr (err error) {

@@ -8,10 +8,10 @@ import (
 const myurl string = "https://example.com/learn:6060?query1=one&query2=two"
 
 func main() {
-	result, _ := url.Parse(myurl);
+	result, _ := url.Parse(myurl); // *url.URL
 
 	fmt.Printf("Type of result %T\n", result)
-	fmt.Println(result.Scheme, "\n", result.Path, "\n", result.Port(), "\n", result.RawQuery)
+	fmt.Println(result.Scheme, "\n", result.Path, "\n", result.RawQuery)
 	fmt.Println(result.Port())
 
 	queries := result.Query()
