@@ -1,27 +1,64 @@
-# Created by https://www.toptal.com/developers/gitignore/api/go
-# Edit at https://www.toptal.com/developers/gitignore?templates=go
+# Node.js dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
-### Go ###
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
-#
-# Binaries for programs and plugins
+# Go build artifacts
+/go/bin/
+/go/pkg/
+*.out
 *.exe
-*.exe~
 *.dll
 *.so
 *.dylib
+*.a
+*.o
 
-# Test binary, built with `go test -c`
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Build artifacts
+dist/
+build/
+
+# Next.js (if applicable)
+.next/
+out/
+
+# Go build cache
+/tmp/
 *.test
+*.prof
 
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
+# Environment variables
+.env
+.env.local
+.env.*.local
+*.env
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.sublime-*
 
-# Go workspace file
-go.work
+# Coverage reports
+coverage/
+*.cov
 
-# End of https://www.toptal.com/developers/gitignore/api/go
+# OS-specific files
+Thumbs.db
+.DS_Store
+
+# Debugging
+debug/
+*.pid
+*.seed
+*.sqlite3
+*.lock
